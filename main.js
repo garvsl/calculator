@@ -33,28 +33,57 @@ const buttons = document.querySelectorAll('.row div')
 const output = document.querySelector('.output');
 const result = document.querySelector('.result')
 
-let pressed;
-let operator;
-let temp;
+
+let operator = 'unchecked';
 let answer;
+let initial = '';
+let after = '';
+
+
 for(let i = 0; i < buttons.length; i++){
     function buttonPress(e){
-        if(buttons[i].textContent == 'C'){
-            output.textContent = '0'
+        if(result.textContent != ''){
+            console.log('penis')
+            output.textContent = ''
             result.textContent = ''
+            initial = ''
+            after = ''
+            operator = 'unchecked'
+        }
+        if(buttons[i].textContent == 'C'){
+            output.textContent = ''
+            result.textContent = ''
+            initial = ''
+            after = ''
+            operator = 'unchecked'
         }else{
             output.textContent += buttons[i].textContent
             if(/^[0-9]+$/.test(buttons[i].textContent)){
-                temp = pressed;
-                pressed = buttons[i].textContent 
-            }else{
+                if(operator == 'unchecked'){
+                    initial += (buttons[i].textContent)
+                }else{
+                    after += (buttons[i].textContent)
+                }
+            }else if(!/^[0-9]+$/.test(buttons[i].textContent) && buttons[i].textContent != '='){
                 operator = buttons[i].textContent 
+
+
             }
             
         }
-        console.log(pressed + operator + temp)
-        console.log(pressed)
-        console.log(operator)
+
+        if(buttons[i].textContent == '='){
+            if(operator == '×'){
+                result.textContent = initial*after
+            }
+        }
+
+        
+
+        
+
+//USE AN ARRAY
+
         
     
         if(output.textContent.length > 15){
