@@ -21,6 +21,7 @@ body{
     gap:10px;
     flex-wrap:wrap;
     max-width:218px;
+    box-shadow:0px 0px 5px #372745;
 
 }
 
@@ -42,7 +43,15 @@ body{
     background-color: #553D6B;
     border:1px solid #8761AB;
 
+    transition:0.2s ease;   
+    box-shadow:0px 0px 5px #8761AB;
     
+}
+
+.row div:hover{
+    background-color: #553d6b54;
+    border:1px solid #553d6b54;
+    transform:scale(1.1)
 }
 
 .equal{
@@ -67,6 +76,8 @@ body{
     max-width: 198px;
     padding:10px;
     gap:5px;
+    transition:0.3s ease;
+    box-shadow:0px 0px 5px #372745;
 
 }
 
