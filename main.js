@@ -34,177 +34,112 @@ const output = document.querySelector('.output');
 const result = document.querySelector('.result')
 
 
-let operator = 'unchecked';
-let answer;
-let initial = '';
-let after = '';
-let num = 0;
-let secondop = 'unchecked'
-let equals;
-let newop;
+
 
 
 for(let i = 0; i < buttons.length; i++){
-    function buttonPress(e){
-        // if(result.textContent != ''){
-        //     output.textContent = ''
-        //     result.textContent = ''
-        //     initial = ''
-        //     after = ''
-        //     operator = 'unchecked'
-        //     secondop = 'unchecked'
-        //     num =0
-            
-        // }
+    function firstEvent(){
         if(buttons[i].textContent == 'C'){
             output.textContent = ''
             result.textContent = ''
-            initial = ''
-            after = ''
-            operator = 'unchecked'
-            num = 0;
-
-            
-        }else{
-            if(buttons[i].textContent != '=' && buttons[i].textContent != operator ){
-                output.textContent += buttons[i].textContent
-            }
-
-            if(/^[0-9]+$/.test(buttons[i].textContent || buttons[i].textContent == '.')){
-                if(operator == 'unchecked'){
-                    initial += (buttons[i].textContent)
-                }else{
-                    after += (buttons[i].textContent)
-                }
-            }else if(!/^[0-9]+$/.test(buttons[i].textContent) && buttons[i].textContent != '=' && buttons[i].textContent != '.' ){
-                operator = buttons[i].textContent
-
-                num++
-
-            }
-            if(num == 1){
-                secondop = operator;
-            } 
-            
         }
+        if(buttons[i].textContent == "." || /^[0-9]+$/.test(buttons[i].textContent)){
+            output.textContent += buttons[i].textContent
+            console.log('goodbye')
+        }else if(!/^[0-9]+$/.test(buttons[i].textContent) && buttons[i].textContent != '=' && buttons[i].textContent != '.' && buttons[i].textContent != 'C'){
+            buttons[i].removeEventListener('click', firstEvent)
+            buttons[i].addEventListener('click', secondEvent)
+            output.textContent += buttons[i].textContent
 
-
-
-        let equalled = () => {
-
-            if(num == 2 && secondop != 'unchecked'){
-                console.log(secondop)
-
-            num = 0
-                if(secondop == '×'){
-                    result.textContent = Number(initial) * Number(after)
-                    equals =  Number(initial) * Number(after)
-                }
-                if(secondop == '+'){
-                    result.textContent = parseFloat(initial) + parseFloat(after)
-                    equals =  parseFloat(initial) + parseFloat(after)
-                }
-                if(secondop == '÷'){
-                    result.textContent = Number(initial) /   Number(after)
-                    equals =  Number(initial) /   Number(after)
-                }
-                if(secondop == '−'){
-                    result.textContent = Number(initial) -   Number(after)
-                    equals = Number(initial) -   Number(after)
-                }
-                if(secondop == '∧'){
-                    result.textContent = Number(initial) **   Number(after)
-                    equals =  Number(initial) **   Number(after)
-                }
-                if(secondop == '%'){
-                    result.textContent = initial / 100
-                }
-
-            }
         }
-        equalled();
-        console.log(`operator: ${operator}`)
-        console.log(`secondop: ${secondop}`)
-        console.log(`initial: ${initial}`)
-        console.log(`after: ${after}`)
-        console.log(`num: ${num}`)
-
-        if(operator != secondop && buttons[i].textContent == '='){
-            if(operator == '×'){
-                result.textContent = Number(equals) * Number(initial)
-            }
-            if(operator == '+'){
-                result.textContent = parseFloat(equals) + parseFloat(initial)
-            }
-            if(operator == '÷'){
-                result.textContent = Number(equals) /   Number(initial)
-            }
-            if(operator == '−'){
-                result.textContent = Number(equals) -   Number(initial)
-            }
-            if(operator == '∧'){
-                result.textContent = Number(equals) **   Number(initial)
-            }
-            if(operator == '%'){
-                result.textContent = equals / 100
-            }
+    }
+    function secondEvent(){
+        if(buttons[i].textContent == 'C'){
+            output.textContent = ''
+            result.textContent = ''
         }
-        
+        if(buttons[i].textContent == "." || /^[0-9]+$/.test(buttons[i].textContent)){
+            output.textContent += buttons[i].textContent
+            console.log('hello')
+        }else if(!/^[0-9]+$/.test(buttons[i].textContent) && buttons[i].textContent != '=' && buttons[i].textContent != '.' && buttons[i].textContent != 'C'){
+            buttons[i].removeEventListener('click', secondEvent)
+            buttons[i].addEventListener('click', firstEvent)
+            output.textContent += buttons[i].textContent
+  
+        }
+    }
 
-        // if(buttons[i].textContent == '='){
-            
-        //     if(num == 1 && secondop != 'unchecked'){
-            
-        //         if(operator == '×'){
-        //             result.textContent = Number(initial) * Number(after)
-        //         }
-        //         if(operator == '+'){
-        //             result.textContent = parseFloat(initial) + parseFloat(after)
-        //         }
-        //         if(operator == '÷'){
-        //             result.textContent = Number(initial) /   Number(after)
-        //         }
-        //         if(operator == '−'){
-        //             result.textContent = Number(initial) -   Number(after)
-        //         }
-        //         if(operator == '∧'){
-        //             result.textContent = Number(initial) **   Number(after)
-        //         }
-        //         if(operator == '%'){
-        //             result.textContent = initial / 100
-        //         }
-
-        //     }
-            
-        // }
+        buttons[i].addEventListener('click', firstEvent);
+  
+   
+}
 
 
 
         
 
-        
-
-        
     
-        if(output.textContent.length > 15){
-            output.textContent = 'ERROR'
-        }
 //do it that way which means iphone way which means after 
 // each both numbers and operator are there then or a variable is true
 //  then calculate and set the numbers back to inital
 // and set one to the result 
 //positive negative and delete 
 //add click effect
+//make sure they cant clikc signs twice
 
 //decimals dont work
 
 //current one doesnt work cus u cant enter two numbers in after
 //if number is 2 then use the result and operate it to whatever was entered
 //
+//have them all in one big event handler
 
+/*
+This is the algorithm:
+
+Make a click handler that is looped through by all the buttons
+and have it so when you click a button it is placed into a firstvariable
+and if an operator is pressed then the close the previus click handler and create another
+in this new one repeat the same thign so that all numbers are looped
+and any number clicked is placed into a secondvariable
+inside the second click event have it check if another operator is pressed
+if it is then have it rerun
+outside everything have an if the equal button is pressed then just calculate or inside both
+functions have that
+have a while loop on all these
+
+let firstnum = 0
+let secondnum = 0
+
+for loop
+
+    function firstevent{
+        if(button == operator){
+            remove.eventlistener(firstevent)
+            add.eventlistener(secondevent)
+        }else{
+            firstnum += Number(buttons[i])
+        }
+        
     }
-    buttons[i].addEventListener('click', buttonPress);
+        function secondevent{
+        if(button == operator){
+            remove.eventlistener(secondevent)
+            add.eventListener(firstevent)
+        }else{
+            secondnum += number[buttons[i]]
+        }
+        
+    }
+
+    buttons[i] click firstevent
+    buttons[i] click secondevent
 
 
-}
-//5x4
+    
+
+
+
+
+
+*/
