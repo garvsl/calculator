@@ -16,11 +16,45 @@ let opnum = 0;
 let ogbutcounter = 0;
 let butcounter = 0;
 let afterbutcounter = 0;
+let equalcancel = false;
+let currentnum;
+let nextnum;
+let text;
+let remove;
+let initialremove;
+let initialpop;
+let nextremove;
+let nextpop;
+let array;
+let newarray;
+let test;
+let neg;
+//change exponent to positive/negative sign
 
 
 for(let i = 0; i < buttons.length; i++){
     function buttonPress(e){
 
+        if(result.textContent != '' && equalcancel == true){
+            output.textContent = ''
+            result.textContent = ''
+            initial = ''
+            after = ''
+            operator = 'unchecked'
+            secondop = 'unchecked'
+            num = 0;
+            opnum = 0;
+            equals = 'undefined'
+            ogbutcounter = 0;
+            butcounter = 0;
+            afterbutcounter = 0;
+            equalcancel = false;
+            neg = 0
+
+        }
+
+
+  
         if(buttons[i].textContent == 'C'){
             output.textContent = ''
             result.textContent = ''
@@ -34,6 +68,69 @@ for(let i = 0; i < buttons.length; i++){
             ogbutcounter = 0;
             butcounter = 0;
             afterbutcounter = 0;
+            neg = 0
+            
+        }else if(buttons[i].textContent == 'DEL'){
+            //if its null or zero dont do
+            text = output.textContent.split("")
+            remove = text.pop()
+            output.textContent = text.join('')
+            if(remove == nextnum){
+                nextremove = after.split("")
+                nextpop  = nextremove.pop()
+                after = nextremove.join('')
+            }else if(remove == currentnum){
+                initialremove = initial.split("")
+                initialpop  = initialremove.pop()
+                initial = initialremove.join('')
+            }
+        
+            output.textContent = text.join("")
+
+
+        }else if(buttons[i].textContent == '+/−'){
+            array = output.textContent.split(operator)
+
+            if(operator != 'unchecked'){
+ 
+                
+
+
+               
+                if(neg == 1){
+                    neg = 0;
+                    after *= -1
+                    array[1] = after
+                    output.textContent = array.join(operator);
+                }else if(neg != 1){
+                    neg = 1;
+                    after *= -1;
+                    array[1] = after
+                    output.textContent = array.join(operator);
+                    
+                }
+              
+                
+            }else{
+         
+                if(neg == 1){
+                    
+                    initial *= -1
+                    
+                    array[0] = initial
+                    neg = 0;
+                    output.textContent = array.join('')
+
+                }else if(neg != 1){
+            
+
+                    neg = 1;
+                    initial *= -1
+                    array[0] = initial
+                    output.textContent = array.join('')
+                }
+            }
+   
             
 
             //create a counter for the period for initial and after
@@ -55,8 +152,12 @@ for(let i = 0; i < buttons.length; i++){
                     if(butcounter < 1 && buttons[i].textContent == '.'){
                         butcounter++
                         initial += (buttons[i].textContent)
+                        currentnum = buttons[i].textContent
+      
                     }else if(buttons[i].textContent != '.'){
+                        currentnum = buttons[i].textContent
                         initial += (buttons[i].textContent)
+             
                     }
                     
                 }else{
@@ -64,8 +165,10 @@ for(let i = 0; i < buttons.length; i++){
                     if(afterbutcounter < 1 && buttons[i].textContent == '.'){
                         afterbutcounter++
                         after += (buttons[i].textContent)
+                        nextnum =  buttons[i].textContent
                     }else if(buttons[i].textContent != '.'){
                         after += (buttons[i].textContent)
+                        nextnum =  buttons[i].textContent
                     }
                     
                    
@@ -86,6 +189,7 @@ for(let i = 0; i < buttons.length; i++){
             
         }
 
+   
         //this gets run if someone pressed equal sign
    
         if(buttons[i].textContent == '=' && opnum == 1){
@@ -110,6 +214,8 @@ for(let i = 0; i < buttons.length; i++){
             if(operator == '%'){
                 answer = result.textContent = (initial / 100).toFixed(2);
             }
+
+            equalcancel = true
         
 
             
@@ -117,6 +223,7 @@ for(let i = 0; i < buttons.length; i++){
 
         }
 
+   
 
         //this is regular operation which happens after an operator is pressed the secon dtime
 
@@ -211,6 +318,8 @@ for(let i = 0; i < buttons.length; i++){
                 result.textContent = (equals / 100).toFixed(2);
                 equals = result.textContent = (equals / 100).toFixed(2);
             }
+
+            equalcancel = true
           
         }
 
@@ -235,7 +344,7 @@ for(let i = 0; i < buttons.length; i++){
 //positive negative and delete 
 //add click effect
 
-//decimals dont work
+
 
 //current one doesnt work cus u cant enter two numbers in after
 //if number is 2 then use the result and operate it to whatever was entered
