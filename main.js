@@ -29,29 +29,12 @@ let array;
 let newarray;
 let test;
 let neg;
+
 //change exponent to positive/negative sign
 
 
 for(let i = 0; i < buttons.length; i++){
     function buttonPress(e){
-
-        if(result.textContent != '' && equalcancel == true){
-            output.textContent = ''
-            result.textContent = ''
-            initial = ''
-            after = ''
-            operator = 'unchecked'
-            secondop = 'unchecked'
-            num = 0;
-            opnum = 0;
-            equals = 'undefined'
-            ogbutcounter = 0;
-            butcounter = 0;
-            afterbutcounter = 0;
-            equalcancel = false;
-            neg = 0
-
-        }
 
 
   
@@ -69,6 +52,7 @@ for(let i = 0; i < buttons.length; i++){
             butcounter = 0;
             afterbutcounter = 0;
             neg = 0
+            equalcancel = false;
             
         }else if(buttons[i].textContent == 'DEL'){
             //if its null or zero dont do
@@ -196,32 +180,44 @@ for(let i = 0; i < buttons.length; i++){
      
 
             if(operator == '×'){
-                answer = result.textContent = (Number(initial) * Number(after)).toFixed(2);
+                result.textContent = (Number(initial) * Number(after)).toFixed(2);
+                equals = (Number(initial) * Number(after)).toFixed(2);
             }
             if(operator == '+'){
-                answer = result.textContent = (parseFloat(initial) + parseFloat(after)).toFixed(2);
+                result.textContent = (parseFloat(initial) + parseFloat(after)).toFixed(2);
+                equals = (parseFloat(initial) + parseFloat(after)).toFixed(2);
                 
             }
             if(operator == '÷'){
-                answer = result.textContent = (Number(initial) /   Number(after)).toFixed(2);
+                result.textContent = (Number(initial) /   Number(after)).toFixed(2);
+                equals = (Number(initial) /   Number(after)).toFixed(2);
             }
             if(operator == '−'){
-                answer = result.textContent = (Number(initial) -   Number(after)).toFixed(2);
+                result.textContent = (Number(initial) -   Number(after)).toFixed(2);
+                equals = (Number(initial) -   Number(after)).toFixed(2);
             }
             if(operator == '∧'){
-                answer = result.textContent = (Number(initial) **   Number(after)).toFixed(2);
+                result.textContent = (Number(initial) **   Number(after)).toFixed(2);
+                equals = (Number(initial) **   Number(after)).toFixed(2);
             }
             if(operator == '%'){
-                answer = result.textContent = (initial / 100).toFixed(2);
+                result.textContent = (initial / 100).toFixed(2);
+                equals = (initial / 100).toFixed(2);
             }
 
             equalcancel = true
-        
 
+            num = 1
+            
+            
+        
+            
             
             
 
         }
+
+
 
    
 
@@ -252,9 +248,24 @@ for(let i = 0; i < buttons.length; i++){
                 result.textContent = (initial / 100).toFixed(2);
             }
 
+         
+ 
+
+      
+
         }
 
         //this is run the second time someone presses another operator
+
+        if(opnum == 2 || num == 2){
+            initial = '';
+            after = '';
+            num = 1;
+            opnum = 0;
+            
+            output.textContent = equals + operator
+            result.textContent = ''
+        }
 
         if(opnum == 1   && num == 2){
 
@@ -281,75 +292,66 @@ for(let i = 0; i < buttons.length; i++){
             if(secondop == '%'){
                 result.textContent = (equals / 100).toFixed(2);
             }
-            initial = '';
-            after = '';
-            num = 1;
-            opnum = 0;
 
             output.textContent = equals + operator
         }
-        //this is supposed to be run when someone pressed operator after having an
-        //answer
+        // this is supposed to be run when someone pressed operator after having an
+        // //answer
         if((buttons[i].textContent == '=' && opnum == 0) ){
         
 
             if(operator == '×'){
                 result.textContent = (Number(equals) * Number(after)).toFixed(2);
-                equals = result.textContent = (Number(equals) * Number(after)).toFixed(2);
+                equals = (Number(equals) * Number(after)).toFixed(2);
                 
             }
             if(operator == '+'){
                 result.textContent = (parseFloat(equals) + parseFloat(after)).toFixed(2);
-                equals = result.textContent = (parseFloat(equals) + parseFloat(after)).toFixed(2);
+                equals = (parseFloat(equals) + parseFloat(after)).toFixed(2);
             }
             if(operator == '÷'){
                result.textContent =( Number(equals) /   Number(after)).toFixed(2);
-               equals = result.textContent =( Number(equals) /   Number(after)).toFixed(2);
+               equals = ( Number(equals) /   Number(after)).toFixed(2);
             }
             if(operator == '−'){
                 result.textContent = (Number(equals) - Number(after)).toFixed(2);
-                equals =  result.textContent = (Number(equals) - Number(after)).toFixed(2);
+                equals =  (Number(equals) - Number(after)).toFixed(2);
             }
             if(operator == '∧'){
                 result.textContent = (Number(equals) **   Number(after)).toFixed(2);
-                equals =  result.textContent =( Number(equals) **   Number(after)).toFixed(2);  
+                equals = (Number(equals) **   Number(after)).toFixed(2);  
             }
             if(operator == '%'){
                 result.textContent = (equals / 100).toFixed(2);
-                equals = result.textContent = (equals / 100).toFixed(2);
+                equals = (equals / 100).toFixed(2);
             }
 
             equalcancel = true
+        
+
+ 
           
         }
 
-        if(opnum == 2){
-            initial = '';
-            after = '';
-            num = 1;
-            opnum = 0;
-            
-            output.textContent = equals + operator
-        }
+
         
 
         if(output.textContent.length > 15){
             output.textContent = 'ERROR'
         }
 
-//do it that way which means iphone way which means after 
-// each both numbers and operator are there then or a variable is true
-//  then calculate and set the numbers back to inital
-// and set one to the result 
-//positive negative and delete 
+        if(result.textContent == 'Infinity'){
+            result.textContent = 'Thats not allowed!'
+        }
+
+
+
+
 //add click effect
 
+//add keyboard support
 
-
-//current one doesnt work cus u cant enter two numbers in after
-//if number is 2 then use the result and operate it to whatever was entered
-//
-//after is wrong and output is not outputitng
+//goto commit or just see whats causing it to be like this..
     
     }   
     buttons[i].addEventListener('click', buttonPress);
