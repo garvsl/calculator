@@ -34,6 +34,32 @@ let neg;
 
 
 for(let i = 0; i < buttons.length; i++){
+    window.addEventListener('keyup', (e) => {
+        test = e.key
+        if(e.key == 'Backspace'){
+            test = 'DEL'
+        }
+        if(e.key == 'Enter'){
+            test = '='
+        }
+        if(e.key == 'c'){
+            test = 'C'
+        }
+        if(e.key == '*' || e.key == 'x'){
+            test = '×'
+        }
+        if(e.key == '-'){
+            test = '−'
+        }
+        if(e.key == '?'){
+            test = '÷'
+        }
+        if(test == buttons[i].textContent){
+            buttonPress()
+            
+        }
+        
+    })
     function buttonPress(e){
 
 
@@ -207,7 +233,7 @@ for(let i = 0; i < buttons.length; i++){
 
             equalcancel = true
 
-            num = 1
+            
             
             
         
@@ -248,6 +274,7 @@ for(let i = 0; i < buttons.length; i++){
                 result.textContent = (initial / 100).toFixed(2);
             }
 
+            
          
  
 
@@ -256,7 +283,7 @@ for(let i = 0; i < buttons.length; i++){
         }
 
         //this is run the second time someone presses another operator
-
+   
         if(opnum == 2 || num == 2){
             initial = '';
             after = '';
@@ -294,6 +321,8 @@ for(let i = 0; i < buttons.length; i++){
             }
 
             output.textContent = equals + operator
+
+            
         }
         // this is supposed to be run when someone pressed operator after having an
         // //answer
