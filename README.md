@@ -1,11 +1,19 @@
-Hi, this is my Calculator project. 
+# Calculator
 
-I had trouble figuring out the process of this project and how to complete it. Definitely
-one of the hardest I have done. 
+This is a calculator which features all the basic stuff that a normal calculator does.
 
-But overall it was awesome finally end up with what I imagined at beginning.
+[live demo](https://garvsl.github.io/calculator/)
 
-https://garvsl.github.io/calculator/
+## My Thought Process 
+
+The creation of the design was simple and easy, the hard part came to when I had to find a way to do the operations. The method I came up with was by adding each number and operator used to a variable and doing calculations with that. 
+
+## My Troubles
+
+It was hard to figure out how to exactly do the calculations, and also how to make them stay consistent with the different ways that a calculator can be used.
+
+
+
 
 
 
